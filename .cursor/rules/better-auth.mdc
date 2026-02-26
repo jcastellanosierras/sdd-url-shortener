@@ -1,0 +1,21 @@
+---
+description: Usar better-auth para autenticación; activa la skill y apunta a su ubicación
+globs: "**/*.{ts,tsx,js,jsx}"
+alwaysApply: false
+---
+
+# Better Auth en el proyecto
+
+## Cuándo usar la skill
+
+Cuando el trabajo implique **autenticación o autorización** (login, registro, sesiones, OAuth, 2FA, roles, permisos), se debe usar la skill de better-auth.
+
+## Ubicación de la skill
+
+- **Ruta**: `.cursor/skills/better-auth/SKILL.md`
+- **Uso**: Lee y aplica las instrucciones de esa skill. La skill indica usar better-auth y consultar la documentación actualizada mediante el MCP **user-context7** (resolve-library-id y query-docs para la librería better-auth).
+
+## Resumen
+
+1. Tarea relacionada con auth → aplicar la skill en `.cursor/skills/better-auth/SKILL.md`.
+2. Documentación y ejemplos → MCP user-context7, library ID `/better-auth/better-auth`.
