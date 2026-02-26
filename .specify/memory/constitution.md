@@ -1,12 +1,12 @@
 <!--
-  Sync Impact Report (validation pass — no amendments)
+  Sync Impact Report (re-validation — 2026-02-26)
   Version change: 1.0.0 → 1.0.0 (unchanged)
   Modified principles: none
   Added sections: none
   Removed sections: none
-  Templates: plan-template.md ✅ (Constitution Check aligned), spec-template.md ✅ (scope/requirements aligned), tasks-template.md ✅ (principle-driven task types; references constitution)
-  Commands: .specify/templates/commands/ does not exist; speckit commands live in .cursor/commands/ — plan-template.md references .specify/templates/commands/plan.md ⚠ (path N/A)
-  Follow-up TODOs: optional — update plan-template.md "See .specify/templates/commands/plan.md" to .cursor/commands/speckit.plan.md if desired
+  Templates: plan-template.md ✅ (Constitution Check aligned with four principles; .cursor/commands path), spec-template.md ✅ (scope/requirements), tasks-template.md ✅ (constitution-driven test tasks)
+  Commands: .cursor/commands/speckit.* — referenced correctly in plan-template ✅
+  Follow-up TODOs: none
 -->
 
 # URL Shortener Constitution

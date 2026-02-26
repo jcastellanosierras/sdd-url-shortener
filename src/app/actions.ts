@@ -1,9 +1,10 @@
 "use server";
 
 import { headers } from "next/headers";
-import { urlSchema } from "@/lib/validations";
-import { generateSlug } from "@/lib/slug";
+import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { generateSlug } from "@/lib/slug";
+import { urlSchema } from "@/lib/validations";
 
 export type CreateShortUrlResult =
   | { success: true; shortUrl: string }
@@ -18,11 +19,17 @@ export async function createShortenedUrl(
   const parsed = urlSchema.safeParse(url);
   if (!parsed.success) {
     const first = parsed.error.issues?.[0];
-    const msg = (first && "message" in first ? first.message : undefined) ?? "URL no válida";
+    const msg =
+      (first && "message" in first ? first.message : undefined) ??
+      "URL no válida";
     return { success: false, error: String(msg) };
   }
 
   const originalUrl = parsed.data;
+
+  const h = await headers();
+  const session = await auth.api.getSession({ headers: h });
+  const userId = session?.user?.id ?? null;
 
   let slug = generateSlug(8);
   const maxAttempts = 5;
@@ -33,10 +40,9 @@ export async function createShortenedUrl(
   }
 
   await prisma.shortenedURL.create({
-    data: { slug, originalUrl },
+    data: { slug, originalUrl, userId },
   });
 
-  const h = await headers();
   const host = h.get("host") ?? "localhost:3000";
   const proto = h.get("x-forwarded-proto") ?? "http";
   const baseUrl = `${proto}://${host}`;
