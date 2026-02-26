@@ -55,6 +55,12 @@ export default async function DashboardPage() {
               >
                 → {item.originalUrl}
               </p>
+              <Link
+                href={`/dashboard/links/${item.slug}/analytics`}
+                className="mt-2 inline-block rounded bg-gray-200 px-3 py-1.5 text-sm font-medium text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+              >
+                Ver analíticas
+              </Link>
             </li>
           ))}
         </ul>

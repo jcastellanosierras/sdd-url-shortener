@@ -1,8 +1,10 @@
+import { after } from "next/server";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { registerVisitFromRedirect } from "@/lib/visits-register";
 
 export async function GET(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
@@ -15,5 +17,8 @@ export async function GET(
       { status: 404 }
     );
   }
+  after(() => {
+    registerVisitFromRedirect(row.id, request).catch(() => {});
+  });
   return NextResponse.redirect(row.originalUrl, 302);
 }

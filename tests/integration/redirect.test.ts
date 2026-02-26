@@ -2,6 +2,16 @@ import { describe, it, expect, vi } from "vitest";
 import { NextRequest } from "next/server";
 import { GET } from "@/app/[slug]/route";
 
+vi.mock("next/server", async (importOriginal) => {
+  const mod = await importOriginal<typeof import("next/server")>();
+  return {
+    ...mod,
+    after: (fn: () => void | Promise<void>) => {
+      void Promise.resolve().then(() => fn());
+    },
+  };
+});
+
 vi.mock("@/lib/db", () => ({
   prisma: {
     shortenedURL: {
@@ -23,7 +33,9 @@ describe("GET /[slug]", () => {
     });
 
     const request = new NextRequest("http://localhost:3000/abc12xy");
-    const response = await GET(request, { params: Promise.resolve({ slug: "abc12xy" }) });
+    const response = await GET(request, {
+      params: Promise.resolve({ slug: "abc12xy" }),
+    });
 
     expect(response.status).toBe(302);
     expect(response.headers.get("location")).toBe("https://example.com/target");
@@ -33,7 +45,9 @@ describe("GET /[slug]", () => {
     vi.mocked(prisma.shortenedURL.findUnique).mockResolvedValueOnce(null);
 
     const request = new NextRequest("http://localhost:3000/nonexistent");
-    const response = await GET(request, { params: Promise.resolve({ slug: "nonexistent" }) });
+    const response = await GET(request, {
+      params: Promise.resolve({ slug: "nonexistent" }),
+    });
 
     expect(response.status).toBe(404);
     const json = await response.json();
