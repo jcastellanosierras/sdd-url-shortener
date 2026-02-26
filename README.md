@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# URL Shortener
 
-## Getting Started
+Proyecto base para la aplicación URL shortener: Next.js (App Router), TypeScript, pnpm, Prisma, shadcn/ui, Vitest, ESLint y Prettier.
 
-First, run the development server:
+## Requisitos
+
+- **Node.js**: 20.9 o superior (recomendado LTS).
+- **Gestor de paquetes**: [pnpm](https://pnpm.io/).
+
+## Instalación
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repo-url>
+cd url-shortener
+
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Comandos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Comando           | Descripción                                    |
+| ----------------- | ---------------------------------------------- |
+| `pnpm dev`        | Servidor de desarrollo (http://localhost:3000) |
+| `pnpm build`      | Build de producción                            |
+| `pnpm start`      | Servir build en producción                     |
+| `pnpm test`       | Ejecutar tests (Vitest)                        |
+| `pnpm test:watch` | Tests en modo watch                            |
+| `pnpm lint`       | ESLint                                         |
+| `pnpm format`     | Formatear código con Prettier                  |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Arranque rápido
 
-## Learn More
+```bash
+pnpm install
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Abre [http://localhost:3000](http://localhost:3000). En la página principal puedes introducir una URL y obtener un enlace corto; al visitar ese enlace se redirige a la URL original.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Estructura
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `src/app/` — Rutas (App Router): página principal (formulario) y `[slug]` (redirección).
+- `src/components/ui/` — Componentes shadcn/ui.
+- `src/lib/` — Utilidades, Prisma, validaciones (Zod) y generación de slug.
+- `prisma/` — Esquema SQLite y migraciones (modelo ShortenedURL).
+- `tests/` — Tests unitarios e integración.
 
-## Deploy on Vercel
+Para más detalle, ver [specs/002-url-shortener/quickstart.md](specs/002-url-shortener/quickstart.md).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Next.js**: última estable (ver `package.json`).
+- TypeScript, ESLint, Prettier, Vitest, React Testing Library, shadcn/ui, Prisma (SQLite), Zod.

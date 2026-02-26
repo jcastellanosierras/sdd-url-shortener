@@ -1,0 +1,50 @@
+# url-shortener Development Guidelines
+
+Auto-generated from all feature plans. Last updated: 2026-02-10
+
+## Active Technologies
+- TypeScript 5 (Node.js >= 20.9) + Next.js 16, React 19, Prisma 7, shadcn/ui (Radix, Tailwind), Zod (añadir) (002-url-shortener)
+- SQLite vía Prisma (archivo local en desarrollo); migración futura a Turso posible (002-url-shortener)
+
+- TypeScript 5.x (Node.js 20.9+) + Next.js (última estable), shadcn/ui, Prisma, ESLint, Prettier (001-init-nextjs-repo)
+
+## Project Structure
+
+```text
+backend/
+frontend/
+tests/
+```
+
+## Commands
+
+npm test && npm run lint
+
+## Code Style
+
+TypeScript 5.x (Node.js 20.9+): Follow standard conventions
+
+## Recent Changes
+- 002-url-shortener: Added TypeScript 5 (Node.js >= 20.9) + Next.js 16, React 19, Prisma 7, shadcn/ui (Radix, Tailwind), Zod (añadir)
+
+- 001-init-nextjs-repo: Added TypeScript 5.x (Node.js 20.9+) + Next.js (última estable), shadcn/ui, Prisma, ESLint, Prettier
+
+<!-- MANUAL ADDITIONS START -->
+
+## Speckit: Orchestrator and subagents (non-negotiable)
+
+**Speckit commands (specify, plan, tasks, implement, etc.) and each SDD phase task must run in subagents.** This is not optional.
+
+- **Orchestrator agent (main):** The agent where commands are invoked. Its role is to:
+  - Invoke commands (speckit.specify, speckit.plan, speckit.tasks, speckit.implement, etc.) and pass them the project context they need.
+  - Receive the result from each subagent when it finishes.
+  - Keep process context by having each subagent report back what it did when it completes.
+
+- **Subagents:** Each SDD phase has its own subagent with focused context:
+  - The orchestrator gives them project context so they can do their task in a focused way.
+  - They run the task (specify, plan, break down tasks, implement, etc.) in their own context.
+  - **When done, they report back to the orchestrator** and explain what they did, so the orchestrator has up-to-date process context without filling its main context.
+
+**Non-negotiable rule:** Speckit commands and SDD tasks must not run in the orchestrator agent; they must always be delegated to subagents. This avoids saturating the orchestrator’s context and gives each phase the right context.
+
+<!-- MANUAL ADDITIONS END -->
