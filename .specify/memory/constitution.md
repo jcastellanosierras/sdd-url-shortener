@@ -1,10 +1,10 @@
 <!--
   Sync Impact Report (re-validation — 2026-02-26)
-  Version change: 1.0.0 → 1.0.0 (unchanged)
+  Version change: 1.0.0 → 1.0.1 (PATCH: re-validation and governance dates alignment)
   Modified principles: none
   Added sections: none
   Removed sections: none
-  Templates: plan-template.md ✅ (Constitution Check aligned with four principles; .cursor/commands path), spec-template.md ✅ (scope/requirements), tasks-template.md ✅ (constitution-driven test tasks)
+  Templates: plan-template.md ✅ (Constitution Check aligned with four principles), spec-template.md ✅, tasks-template.md ✅
   Commands: .cursor/commands/speckit.* — referenced correctly in plan-template ✅
   Follow-up TODOs: none
 -->
@@ -68,4 +68,4 @@ El rendimiento MUST ser medible y cumplir objetivos definidos por dominio.
 - Revisión de cumplimiento: en cada plan de feature se debe re-evaluar el Constitution Check; las desviaciones deben quedar registradas.
 - Para guía operativa de desarrollo (comandos, flujos, scripts), usar la documentación del proyecto y los comandos en `.cursor/commands/`.
 
-**Version**: 1.0.0 | **Ratified**: 2025-02-10 | **Last Amended**: 2025-02-10
+**Version**: 1.0.1 | **Ratified**: 2025-02-10 | **Last Amended**: 2026-02-26

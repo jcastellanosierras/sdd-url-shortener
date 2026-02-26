@@ -1,6 +1,6 @@
-# URL Shortener
+# URL Shortener (sdd-url-shortener)
 
-Proyecto base para la aplicación URL shortener: Next.js (App Router), TypeScript, pnpm, Prisma, shadcn/ui, Vitest, ESLint y Prettier.
+Aplicación para acortar URLs con autenticación, panel de usuario y analíticas de visitas. Next.js (App Router), TypeScript, pnpm, Prisma (SQLite), better-auth, shadcn/ui, Vitest, ESLint y Prettier.
 
 ## Requisitos
 
@@ -10,10 +10,12 @@ Proyecto base para la aplicación URL shortener: Next.js (App Router), TypeScrip
 ## Instalación
 
 ```bash
-git clone <repo-url>
-cd url-shortener
+git clone https://github.com/<tu-usuario>/sdd-url-shortener.git
+cd sdd-url-shortener
 
 pnpm install
+pnpm prisma generate
+pnpm prisma migrate dev
 ```
 
 ## Comandos
@@ -32,22 +34,37 @@ pnpm install
 
 ```bash
 pnpm install
+pnpm prisma generate
+pnpm prisma migrate dev
 pnpm dev
 ```
 
-Abre [http://localhost:3000](http://localhost:3000). En la página principal puedes introducir una URL y obtener un enlace corto; al visitar ese enlace se redirige a la URL original.
+Abre [http://localhost:3000](http://localhost:3000).
+
+- **Página principal**: introduce una URL y obtén un enlace corto (requiere iniciar sesión o registrarse).
+- **Redirección**: al visitar `/{slug}` se redirige a la URL original y se registra una visita (analíticas).
+- **Dashboard**: lista tus URLs acortadas y enlace a analíticas por enlace.
+- **Analíticas**: por cada enlace, total de visitas y desglose por país, dispositivo, SO, referrer y parámetros UTM.
 
 ## Estructura
 
-- `src/app/` — Rutas (App Router): página principal (formulario) y `[slug]` (redirección).
-- `src/components/ui/` — Componentes shadcn/ui.
-- `src/lib/` — Utilidades, Prisma, validaciones (Zod) y generación de slug.
-- `prisma/` — Esquema SQLite y migraciones (modelo ShortenedURL).
-- `tests/` — Tests unitarios e integración.
-
-Para más detalle, ver [specs/002-url-shortener/quickstart.md](specs/002-url-shortener/quickstart.md).
+- `src/app/` — App Router: página principal, login, registro, dashboard, `[slug]` (redirección), `api/visits`, `api/links/[slug]/analytics`, `dashboard/links/[slug]/analytics`.
+- `src/components/` — UI (shadcn, cabecera con auth).
+- `src/lib/` — Prisma, auth (better-auth), validaciones (Zod), slug, analíticas (visits, parsing, register).
+- `prisma/` — Esquema SQLite (User, Session, Account, ShortenedURL, Visit) y migraciones.
+- `tests/` — Tests unitarios e integración (Vitest).
+- `specs/` — Especificaciones por feature (002 url-shortener, 003 user-auth, 004 link-analytics).
 
 ## Stack
 
-- **Next.js**: última estable (ver `package.json`).
-- TypeScript, ESLint, Prettier, Vitest, React Testing Library, shadcn/ui, Prisma (SQLite), Zod.
+- **Next.js** 16, **React** 19, **TypeScript** 5.
+- **Prisma** 7 con SQLite (better-sqlite3).
+- **better-auth** (email/contraseña, sesiones).
+- **shadcn/ui**, Radix, Tailwind, Zod.
+- **Vitest**, React Testing Library, jsdom.
+
+## Documentación de features
+
+- [specs/002-url-shortener](specs/002-url-shortener/) — Acortador de URLs.
+- [specs/003-user-auth](specs/003-user-auth/) — Autenticación y dashboard.
+- [specs/004-link-analytics](specs/004-link-analytics/) — Analíticas de visitas (UTM, dispositivo, SO, referrer).
