@@ -10,9 +10,8 @@ export default defineConfig({
   },
   datasource: {
     // SQLite for local dev (feature 002-url-shortener). For production use DATABASE_URL (e.g. Turso).
-    url:
-      process.env["DATABASE_URL"]?.startsWith("file:")
-        ? process.env["DATABASE_URL"]
-        : "file:./prisma/dev.db",
+    url: process.env["DATABASE_URL"]?.startsWith("file:")
+      ? process.env["DATABASE_URL"]
+      : "file:./prisma/dev.db",
   },
 });

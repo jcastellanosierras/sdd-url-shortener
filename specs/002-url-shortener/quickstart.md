@@ -28,16 +28,16 @@ pnpm exec prisma generate
 
 ## Comandos principales
 
-| Comando                     | Descripción                                      |
-| --------------------------- | ------------------------------------------------ |
-| `pnpm dev`                  | Servidor de desarrollo (http://localhost:3000)   |
-| `pnpm build`                | Build de producción                              |
-| `pnpm start`                | Servir build en producción                       |
-| `pnpm test`                 | Ejecutar tests (Vitest)                          |
-| `pnpm test:watch`           | Tests en modo watch                              |
-| `pnpm lint`                 | ESLint                                           |
-| `pnpm format`               | Prettier                                         |
-| `pnpm exec prisma migrate dev` | Crear/aplicar migraciones (desarrollo)       |
+| Comando                        | Descripción                                    |
+| ------------------------------ | ---------------------------------------------- |
+| `pnpm dev`                     | Servidor de desarrollo (http://localhost:3000) |
+| `pnpm build`                   | Build de producción                            |
+| `pnpm start`                   | Servir build en producción                     |
+| `pnpm test`                    | Ejecutar tests (Vitest)                        |
+| `pnpm test:watch`              | Tests en modo watch                            |
+| `pnpm lint`                    | ESLint                                         |
+| `pnpm format`                  | Prettier                                       |
+| `pnpm exec prisma migrate dev` | Crear/aplicar migraciones (desarrollo)         |
 
 ## Verificación rápida (después de implementar)
 

@@ -16,7 +16,12 @@ vi.mock("@/lib/db", () => ({
     shortenedURL: {
       findUnique: vi.fn(() => Promise.resolve(null)),
       create: vi.fn((args: { data: { slug: string; originalUrl: string } }) =>
-        Promise.resolve({ id: "1", ...args.data, createdAt: new Date(), updatedAt: new Date() })
+        Promise.resolve({
+          id: "1",
+          ...args.data,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        })
       ),
     },
   },

@@ -3,7 +3,7 @@
 **Branch**: `001-init-nextjs-repo` | **Date**: 2025-02-10 | **Spec**: [spec.md](./spec.md)  
 **Input**: Feature specification from `/specs/001-init-nextjs-repo/spec.md`
 
-**Note**: This template is filled in by the `/speckit.plan` command. See `.specify/templates/commands/plan.md` for the execution workflow.
+**Note**: This template is filled in by the `/speckit.plan` command. See `.cursor/commands/speckit.plan.md` for the execution workflow.
 
 ## Summary
 

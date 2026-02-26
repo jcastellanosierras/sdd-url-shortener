@@ -80,6 +80,6 @@ tests/
 
 > **Fill ONLY if Constitution Check has violations that must be justified**
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-| --------- | ---------- | ------------------------------------- |
-| _(ninguna)_ | — | — |
+| Violation   | Why Needed | Simpler Alternative Rejected Because |
+| ----------- | ---------- | ------------------------------------ |
+| _(ninguna)_ | —          | —                                    |

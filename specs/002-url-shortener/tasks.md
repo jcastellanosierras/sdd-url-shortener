@@ -130,18 +130,18 @@
 
 ### MVP First (User Story 1 Only)
 
-1. Complete Phase 1: Setup  
-2. Complete Phase 2: Foundational  
-3. Complete Phase 3: User Story 1 (tests then implementation)  
-4. **STOP and VALIDATE**: Form creates short URL and shows it (redirect will 404 until US2)  
-5. Deploy/demo form flow if desired  
+1. Complete Phase 1: Setup
+2. Complete Phase 2: Foundational
+3. Complete Phase 3: User Story 1 (tests then implementation)
+4. **STOP and VALIDATE**: Form creates short URL and shows it (redirect will 404 until US2)
+5. Deploy/demo form flow if desired
 
 ### Incremental Delivery
 
-1. Setup + Foundational → DB and validation/slug ready  
-2. User Story 1 → Form creates and displays short URL (MVP)  
-3. User Story 2 → Visiting short URL redirects; 404 for unknown slug  
-4. Polish → Remove demo, run quickstart, update docs  
+1. Setup + Foundational → DB and validation/slug ready
+2. User Story 1 → Form creates and displays short URL (MVP)
+3. User Story 2 → Visiting short URL redirects; 404 for unknown slug
+4. Polish → Remove demo, run quickstart, update docs
 
 ### Parallel
 

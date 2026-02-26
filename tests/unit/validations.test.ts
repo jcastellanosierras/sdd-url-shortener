@@ -10,7 +10,9 @@ describe("urlSchema", () => {
   });
 
   it("accepts valid http URL", () => {
-    expect(urlSchema.parse("http://localhost:3000")).toBe("http://localhost:3000");
+    expect(urlSchema.parse("http://localhost:3000")).toBe(
+      "http://localhost:3000"
+    );
   });
 
   it("rejects empty string", () => {

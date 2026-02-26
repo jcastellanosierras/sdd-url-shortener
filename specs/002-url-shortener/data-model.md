@@ -9,13 +9,13 @@ Una sola entidad de dominio: **ShortenedURL**, que asocia un identificador (slug
 
 ## Entidad: ShortenedURL
 
-| Atributo    | Tipo     | Obligatorio | Descripción |
-| ----------- | -------- | ----------- | ----------- |
-| id          | String   | Sí (PK)     | Identificador único interno (p. ej. cuid, uuid o id auto). No es el slug de la ruta. |
+| Atributo    | Tipo     | Obligatorio | Descripción                                                                                              |
+| ----------- | -------- | ----------- | -------------------------------------------------------------------------------------------------------- |
+| id          | String   | Sí (PK)     | Identificador único interno (p. ej. cuid, uuid o id auto). No es el slug de la ruta.                     |
 | slug        | String   | Sí, único   | Identificador público usado en la URL acortada (p. ej. `fjas952k`). Índice único para búsqueda por ruta. |
-| originalUrl | String   | Sí          | URL de destino (http/https). Almacenada tal cual para la redirección. |
-| createdAt   | DateTime | Sí          | Fecha y hora de creación. |
-| updatedAt   | DateTime | Sí          | Fecha y hora de última actualización. |
+| originalUrl | String   | Sí          | URL de destino (http/https). Almacenada tal cual para la redirección.                                    |
+| createdAt   | DateTime | Sí          | Fecha y hora de creación.                                                                                |
+| updatedAt   | DateTime | Sí          | Fecha y hora de última actualización.                                                                    |
 
 ### Reglas de validación (aplicación)
 
