@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import type { ShortenedURL } from "@prisma/client";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 
@@ -35,7 +36,7 @@ export default async function DashboardPage() {
         </p>
       ) : (
         <ul className="space-y-4">
-          {items.map((item) => (
+          {items.map((item: ShortenedURL) => (
             <li
               key={item.id}
               className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800"

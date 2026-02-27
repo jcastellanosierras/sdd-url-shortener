@@ -63,9 +63,8 @@ export function validateVisitPayload(body: unknown): VisitPayload {
 
 /**
  * Valida y devuelve resultado (safe). Útil para endpoints que devuelven 400.
+ * En Zod v4 el retorno es inferido: { success: true; data: VisitPayload } | { success: false; error: ZodError }
  */
-export function safeValidateVisitPayload(
-  body: unknown
-): z.SafeParseReturnType<unknown, VisitPayload> {
+export function safeValidateVisitPayload(body: unknown) {
   return visitPayloadSchema.safeParse(body);
 }
