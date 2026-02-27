@@ -20,15 +20,16 @@ pnpm prisma migrate dev
 
 ## Comandos
 
-| Comando           | Descripción                                    |
-| ----------------- | ---------------------------------------------- |
-| `pnpm dev`        | Servidor de desarrollo (http://localhost:3000) |
-| `pnpm build`      | Build de producción                            |
-| `pnpm start`      | Servir build en producción                     |
-| `pnpm test`       | Ejecutar tests (Vitest)                        |
-| `pnpm test:watch` | Tests en modo watch                            |
-| `pnpm lint`       | ESLint                                         |
-| `pnpm format`     | Formatear código con Prettier                  |
+| Comando                           | Descripción                                                                                           |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `pnpm dev`                        | Servidor de desarrollo (http://localhost:3000)                                                        |
+| `pnpm build`                      | Build de producción                                                                                   |
+| `pnpm start`                      | Servir build en producción                                                                            |
+| `pnpm test`                       | Ejecutar tests (Vitest)                                                                               |
+| `pnpm test:watch`                 | Tests en modo watch                                                                                   |
+| `pnpm lint`                       | ESLint                                                                                                |
+| `pnpm format`                     | Formatear código con Prettier                                                                         |
+| `pnpm db:turso-apply [nombre-db]` | Aplicar migraciones Prisma a Turso (ver [Turso quickstart](specs/005-turso-connection/quickstart.md)) |
 
 ## Arranque rápido
 
