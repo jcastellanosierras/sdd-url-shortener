@@ -25,10 +25,11 @@ export async function GET(request: Request, context: RouteContext) {
     width: 512,
     margin: 1,
   });
+  const body = new Uint8Array(image);
 
   const isDownload = new URL(request.url).searchParams.get("download") === "1";
 
-  return new NextResponse(image, {
+  return new NextResponse(body, {
     status: 200,
     headers: {
       "Content-Type": "image/png",
