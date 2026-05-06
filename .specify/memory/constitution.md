@@ -1,11 +1,11 @@
 <!--
-  Sync Impact Report (re-validation — 2026-02-26)
-  Version change: 1.0.0 → 1.0.1 (PATCH: re-validation and governance dates alignment)
+  Sync Impact Report (re-validation — 2026-02-27)
+  Version change: none (1.0.1 retained; no constitution text change)
   Modified principles: none
   Added sections: none
   Removed sections: none
-  Templates: plan-template.md ✅ (Constitution Check aligned with four principles), spec-template.md ✅, tasks-template.md ✅
-  Commands: .cursor/commands/speckit.* — referenced correctly in plan-template ✅
+  Templates: plan-template.md ✅ (Constitution Check aligned; workflow path fixed to .opencode/commands/speckit.plan.md), spec-template.md ✅, tasks-template.md ✅
+  Commands: .opencode/commands/speckit.* — plan-template now references correct path
   Follow-up TODOs: none
 -->
 
@@ -66,6 +66,6 @@ El rendimiento MUST ser medible y cumplir objetivos definidos por dominio.
 - Esta constitución tiene prioridad sobre prácticas ad hoc; las decisiones de diseño y proceso deben alinearse con estos principios.
 - Enmiendas: requieren propuesta documentada, impacto en plantillas y versionado semántico (MAJOR/MINOR/PATCH).
 - Revisión de cumplimiento: en cada plan de feature se debe re-evaluar el Constitution Check; las desviaciones deben quedar registradas.
-- Para guía operativa de desarrollo (comandos, flujos, scripts), usar la documentación del proyecto y los comandos en `.cursor/commands/`.
+- Para guia operativa de desarrollo (comandos, flujos, scripts), usar la documentacion del proyecto y los comandos en `.opencode/commands/`.
 
 **Version**: 1.0.1 | **Ratified**: 2025-02-10 | **Last Amended**: 2026-02-26
