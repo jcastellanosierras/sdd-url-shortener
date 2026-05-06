@@ -30,6 +30,19 @@ pnpm prisma migrate dev
 | `pnpm lint`                       | ESLint                                                                                                |
 | `pnpm format`                     | Formatear código con Prettier                                                                         |
 | `pnpm db:turso-apply [nombre-db]` | Aplicar migraciones Prisma a Turso (ver [Turso quickstart](specs/005-turso-connection/quickstart.md)) |
+| `pnpm hash:password`              | Generar hash compatible con better-auth para reset manual de contraseña                               |
+
+### Recuperar contraseña sin email
+
+Si no hay flujo de recuperación por correo, puedes generar un hash compatible con better-auth y actualizarlo manualmente en base de datos.
+
+```bash
+pnpm hash:password
+# o pasando la contraseña por argumento:
+pnpm hash:password -- --password "MiNuevaPassword123!"
+```
+
+Luego, actualiza el campo `password` de `Account` para el usuario/proveedor correspondiente con el hash generado.
 
 ## Arranque rápido
 

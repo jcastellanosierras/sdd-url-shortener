@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "format": "prettier --write .",
-    "db:turso-apply": "./scripts/turso-apply-migrations.sh"
+    "db:turso-apply": "./scripts/turso-apply-migrations.sh",
+    "hash:password": "node ./scripts/hash-password.mjs"
   },
   "dependencies": {
     "@libsql/client": "^0.17.0",
