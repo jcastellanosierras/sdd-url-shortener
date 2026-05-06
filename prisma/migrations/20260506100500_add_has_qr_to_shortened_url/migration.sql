@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "ShortenedURL" ADD COLUMN "hasQr" BOOLEAN NOT NULL DEFAULT false;

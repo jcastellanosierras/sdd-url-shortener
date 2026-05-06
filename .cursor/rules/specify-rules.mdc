@@ -5,6 +5,8 @@ Auto-generated from all feature plans. Last updated: 2026-02-10
 ## Active Technologies
 - TypeScript 5 (Node.js >= 20.9) + Next.js 16, React 19, Prisma 7, shadcn/ui (Radix, Tailwind), Zod (añadir) (002-url-shortener)
 - SQLite vía Prisma (archivo local en desarrollo); migración futura a Turso posible (002-url-shortener)
+- TypeScript (Node ≥20.9), Next.js 16 + Prisma 7.x, Next.js, better-auth; añadir @libsql/client, @prisma/adapter-libsql (005-turso-connection)
+- Turso (libSQL) en runtime cuando está configurado; SQLite local (better-sqlite3) para desarrollo y para generar migraciones (005-turso-connection)
 
 - TypeScript 5.x (Node.js 20.9+) + Next.js (última estable), shadcn/ui, Prisma, ESLint, Prettier (001-init-nextjs-repo)
 
@@ -25,6 +27,7 @@ npm test && npm run lint
 TypeScript 5.x (Node.js 20.9+): Follow standard conventions
 
 ## Recent Changes
+- 005-turso-connection: Added TypeScript (Node ≥20.9), Next.js 16 + Prisma 7.x, Next.js, better-auth; añadir @libsql/client, @prisma/adapter-libsql
 - 002-url-shortener: Added TypeScript 5 (Node.js >= 20.9) + Next.js 16, React 19, Prisma 7, shadcn/ui (Radix, Tailwind), Zod (añadir)
 
 - 001-init-nextjs-repo: Added TypeScript 5.x (Node.js 20.9+) + Next.js (última estable), shadcn/ui, Prisma, ESLint, Prettier

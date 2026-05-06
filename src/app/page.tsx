@@ -2,6 +2,7 @@
 
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -62,6 +63,15 @@ function HomeContent() {
               </p>
             )}
           </div>
+          <div className="flex items-center gap-2">
+            <input
+              id="generateQr"
+              name="generateQr"
+              type="checkbox"
+              className="h-4 w-4 rounded border-zinc-300"
+            />
+            <Label htmlFor="generateQr">Generar codigo QR</Label>
+          </div>
           <Button type="submit">Acortar</Button>
         </form>
         {result?.success && (
@@ -77,6 +87,26 @@ function HomeContent() {
             >
               {result.shortUrl}
             </a>
+            {result.hasQr && result.qrUrl && (
+              <div className="mt-4">
+                <p className="mb-2 text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                  Codigo QR:
+                </p>
+                <Image
+                  src={result.qrUrl}
+                  alt="Codigo QR del enlace acortado"
+                  width={160}
+                  height={160}
+                  className="h-40 w-40 rounded border border-zinc-200 bg-white p-2 dark:border-zinc-700"
+                />
+                <a
+                  href={`${result.qrUrl}?download=1`}
+                  className="mt-3 inline-block text-sm text-blue-600 underline dark:text-blue-400"
+                >
+                  Descargar QR
+                </a>
+              </div>
+            )}
           </div>
         )}
       </main>

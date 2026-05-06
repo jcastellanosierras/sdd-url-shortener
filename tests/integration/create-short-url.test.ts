@@ -15,10 +15,18 @@ vi.mock("@/lib/db", () => ({
   prisma: {
     shortenedURL: {
       findUnique: vi.fn(() => Promise.resolve(null)),
-      create: vi.fn((args: { data: { slug: string; originalUrl: string } }) =>
+      create: vi.fn(
+        (args: {
+          data: {
+            slug: string;
+            originalUrl: string;
+            hasQr?: boolean;
+          };
+        }) =>
         Promise.resolve({
           id: "1",
           ...args.data,
+          hasQr: args.data.hasQr ?? false,
           createdAt: new Date(),
           updatedAt: new Date(),
         })
@@ -39,6 +47,22 @@ describe("createShortenedUrl", () => {
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.shortUrl).toMatch(/^https?:\/\/.+\/[a-zA-Z0-9]{8}$/);
+      expect(result.hasQr).toBe(false);
+      expect(result.qrUrl).toBeNull();
+    }
+  });
+
+  it("returns shortUrl and qrUrl when QR is requested", async () => {
+    const formData = new FormData();
+    formData.set("url", "https://example.com/with-qr");
+    formData.set("generateQr", "on");
+
+    const result = await createShortenedUrl(formData);
+
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.hasQr).toBe(true);
+      expect(result.qrUrl).toMatch(/^\/api\/links\/.+\/qr$/);
     }
   });
 

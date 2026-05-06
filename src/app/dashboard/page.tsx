@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import type { ShortenedURL } from "@prisma/client";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
@@ -56,6 +57,23 @@ export default async function DashboardPage() {
               >
                 → {item.originalUrl}
               </p>
+              {item.hasQr && (
+                <div className="mt-3">
+                  <Image
+                    src={`/api/links/${item.slug}/qr`}
+                    alt={`Codigo QR para ${item.slug}`}
+                    width={96}
+                    height={96}
+                    className="h-24 w-24 rounded border border-gray-200 bg-white p-1 dark:border-gray-700"
+                  />
+                  <a
+                    href={`/api/links/${item.slug}/qr?download=1`}
+                    className="mt-2 inline-block text-sm text-blue-600 underline dark:text-blue-400"
+                  >
+                    Descargar QR
+                  </a>
+                </div>
+              )}
               <Link
                 href={`/dashboard/links/${item.slug}/analytics`}
                 className="mt-2 inline-block rounded bg-gray-200 px-3 py-1.5 text-sm font-medium text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"

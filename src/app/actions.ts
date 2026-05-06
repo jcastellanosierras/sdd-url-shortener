@@ -7,7 +7,7 @@ import { generateSlug } from "@/lib/slug";
 import { urlSchema } from "@/lib/validations";
 
 export type CreateShortUrlResult =
-  | { success: true; shortUrl: string }
+  | { success: true; shortUrl: string; hasQr: boolean; qrUrl: string | null }
   | { success: false; error: string };
 
 export async function createShortenedUrl(
@@ -15,6 +15,7 @@ export async function createShortenedUrl(
 ): Promise<CreateShortUrlResult> {
   const raw = formData.get("url");
   const url = typeof raw === "string" ? raw.trim() : "";
+  const generateQr = formData.get("generateQr") === "on";
 
   const parsed = urlSchema.safeParse(url);
   if (!parsed.success) {
@@ -40,13 +41,14 @@ export async function createShortenedUrl(
   }
 
   await prisma.shortenedURL.create({
-    data: { slug, originalUrl, userId },
+    data: { slug, originalUrl, userId, hasQr: generateQr },
   });
 
   const host = h.get("host") ?? "localhost:3000";
   const proto = h.get("x-forwarded-proto") ?? "http";
   const baseUrl = `${proto}://${host}`;
   const shortUrl = `${baseUrl}/${slug}`;
+  const qrUrl = generateQr ? `/api/links/${slug}/qr` : null;
 
-  return { success: true, shortUrl };
+  return { success: true, shortUrl, hasQr: generateQr, qrUrl };
 }
