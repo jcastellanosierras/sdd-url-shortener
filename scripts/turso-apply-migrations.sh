@@ -19,6 +19,7 @@ if [ -f "$ROOT/.env" ]; then
 fi
 
 MIGRATIONS_DIR="prisma/migrations"
+MIGRATIONS_TABLE="_prisma_migrations_opencode"
 
 # Resolver nombre de la base
 if [ -n "$1" ]; then
@@ -46,12 +47,61 @@ if [ ! -d "$MIGRATIONS_DIR" ]; then
   exit 1
 fi
 
+# Crear tabla de control de migraciones si no existe
+turso db shell "$DB_NAME" "CREATE TABLE IF NOT EXISTS \"$MIGRATIONS_TABLE\" (name TEXT PRIMARY KEY, applied_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP);" >/dev/null
+
+is_known_safe_error() {
+  msg="$1"
+  case "$msg" in
+    *"already exists"*|*"duplicate column name"*)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+is_migration_applied() {
+  migration_name="$1"
+  result="$(turso db shell "$DB_NAME" "SELECT name FROM \"$MIGRATIONS_TABLE\" WHERE name = '$migration_name' LIMIT 1;" 2>/dev/null || true)"
+  [ -n "$result" ]
+}
+
 # Aplicar cada migración en orden (por nombre de carpeta)
 for dir in $(find "$MIGRATIONS_DIR" -maxdepth 1 -type d -name '[0-9]*' | sort); do
   sql="$dir/migration.sql"
+  migration_name="$(basename "$dir")"
+
+  if is_migration_applied "$migration_name"; then
+    echo "Saltando (ya aplicada): $dir"
+    continue
+  fi
+
   if [ -f "$sql" ]; then
     echo "Aplicando: $dir"
-    turso db shell "$DB_NAME" < "$sql"
+    if turso db shell "$DB_NAME" < "$sql"; then
+      turso db shell "$DB_NAME" "INSERT OR IGNORE INTO \"$MIGRATIONS_TABLE\" (name) VALUES ('$migration_name');" >/dev/null
+      continue
+    fi
+
+    output_file="$(mktemp)"
+    if turso db shell "$DB_NAME" < "$sql" >"$output_file" 2>&1; then
+      rm -f "$output_file"
+      turso db shell "$DB_NAME" "INSERT OR IGNORE INTO \"$MIGRATIONS_TABLE\" (name) VALUES ('$migration_name');" >/dev/null
+      continue
+    fi
+
+    output="$(cat "$output_file")"
+    rm -f "$output_file"
+    if is_known_safe_error "$output"; then
+      echo "Saltando (ya existente en DB): $dir"
+      turso db shell "$DB_NAME" "INSERT OR IGNORE INTO \"$MIGRATIONS_TABLE\" (name) VALUES ('$migration_name');" >/dev/null
+    else
+      echo "$output" >&2
+      echo "Error: fallo aplicando $dir" >&2
+      exit 1
+    fi
   fi
 done
 
